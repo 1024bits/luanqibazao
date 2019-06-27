@@ -1,0 +1,54 @@
+== vproxy白嫖heroku，fq=程
+
+
+
+=== 第一步，申请heroku账号。
+链接[https://id.heroku.com/],步骤这里就不在赘述。
+
+=== 第二步，部署app至heroku。
+首先这里使用的项目为：https://github.com/wkgcass/vproxy.最好自己fork一下。
+
+打开：https://dashboard.heroku.com/new-app ，填写appName， choose a region[us，eu]都可以，推荐选择eu。
+
+创建好app之后，在deploy标签页里选择github上代码分支（websocket5分支）。deploy成功之后就可以启动本地客户端了。
+
+=== 第三步，本地客户端启动
+
+客户端下载地址：https://github.com/wkgcass/vproxy/releases
+
+====
+示例配置：
+----
+agent.listen 11080
+agent.httpconnect.listen 18080
+#这里账号密码为deploy之后resources标签页里的账号密码，可以去看。
+proxy.server.auth 账号:密码
+agent.cert.verify on
+agent.gateway off
+agent.gateway.pac.address *:20080
+agent.strict off
+agent.pool 10
+proxy.server.list.start TEST
+websockss://xxxxx.herokuapp.com:443
+proxy.server.list.end
+
+#这里需要翻的域名随便配置，具体规则看github里有示例说明。
+proxy.domain.list.start TEST
+/.*google\.com.*/
+216.58.200.46
+youtube.com
+zh.wikipedia.org
+id.heroku.com
+baidu.com
+tool.lu
+/.*bilibili\.com$/
+proxy.domain.list.end
+----
+====
+
+=== 第四步，配置switchyOmega,首先你得有switchyOmega插件
+推荐 chrome+switchyOmega，浏览器替换成firefox应该也是可以的。配置switchOmega为socks5代理，端口为：agent.listen 对应的端口。
+
+== 然后去冲浪吧！
+
+
