@@ -1,4 +1,4 @@
-= vproxy白嫖heroku，fq=程
+= vproxy白嫖heroku，fq教程
 
 === 第一步，申请heroku账号。
 链接[https://id.heroku.com/],步骤这里就不在赘述。
